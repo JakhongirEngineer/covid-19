@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Header from "./react/components/header/header";
+
+import { Card, CardContent } from "@material-ui/core";
+import "./app.scss";
+import InfoboxContainer from "./react/components/infoboxContainer/InfoboxContainer";
+import Map from "./react/components/map/Map";
+import LineGraph from "./react/components/linegraph/LineGraph";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="app__left">
+        <Header />
+        <InfoboxContainer />
+        <Map />
+      </div>
+      <Card className="app__right">
+        <CardContent>this is right side</CardContent>
+        <LineGraph />
+      </Card>
     </div>
   );
 }

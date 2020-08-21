@@ -1,0 +1,9 @@
+.app {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  &__left {
+    flex: 0.9;
+  }
+}
