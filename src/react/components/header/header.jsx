@@ -24,22 +24,24 @@ function Header({ getCountries, getCountry, setZoomAndPosition }) {
 
   const onHandleSelectCountry = (e) => {
     const name = e.target.value;
-    const fetchData = async () => {
-      await fetch(
-        `https://disease.sh/v3/covid-19/countries/${name}?strict=true`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          getCountry(data);
-          const zoomAndPosition = {
-            zoom: 5,
-            position: [data.countryInfo.lat, data.countryInfo.long],
-          };
-          setZoomAndPosition(zoomAndPosition);
-        });
-    };
-    fetchData();
-    setCountry(name);
+    if (name !== "worldwide") {
+      const fetchData = async () => {
+        await fetch(
+          `https://disease.sh/v3/covid-19/countries/${name}?strict=true`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            getCountry(data);
+            const zoomAndPosition = {
+              zoom: 5,
+              position: [data.countryInfo.lat, data.countryInfo.long],
+            };
+            setZoomAndPosition(zoomAndPosition);
+          });
+      };
+      fetchData();
+      setCountry(name);
+    }
   };
 
   const onHandleWorldwide = (e = "event") => {
