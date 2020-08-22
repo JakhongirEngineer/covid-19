@@ -1,6 +1,8 @@
-.infobox-container {
+.infobox-c {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 60vw;
+  justify-self: center;
+  align-items: center;
+  width: 90vw;
 }

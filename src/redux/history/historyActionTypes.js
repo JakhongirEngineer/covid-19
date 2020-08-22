@@ -1,4 +1,3 @@
-const historyActionTypes = {
-  COUNTRY_SELECTED: "COUNTRY_SELECTED",
+export const historyActionTypes = {
+  SET_HISTORY: "SET_HISTORY",
 };
-export default historyActionTypes;

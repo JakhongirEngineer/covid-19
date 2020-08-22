@@ -1,132 +1,96 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { countryClicked } from "../../../redux/country/actionGenerator";
-import { historyAction } from "../../../redux/history/historyAction";
+import { countriesActionGenerator } from "../../../redux/countries/countriesActionGenerator";
+import { selectCountryActionGenerator } from "../../../redux/country/countryActionGenerator";
+import { setZoomAndPosition } from "../../../redux/map/mapActionGenerator";
 import "./header.scss";
-import { FormControl, Select, MenuItem } from "@material-ui/core";
+import { MenuItem, FormControl, Select } from "@material-ui/core";
 
-const Header = ({ countryClicked, getHistory }) => {
+function Header({ getCountries, getCountry, setZoomAndPosition }) {
   const [countries, setCountries] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState("worldwide");
-  const [countryInfo, setCountryInfo] = useState({});
+  const [country, setCountry] = useState("worldwide");
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch("https://disease.sh/v3/covid-19/all")
-        .then((response) => response.json())
-        .then((data) => {
-          setCountryInfo(data);
-          const worldwide = {
-            cases: data.cases,
-            todayCases: data.todayCases,
-            deaths: data.deaths,
-            todayDeaths: data.todayDeaths,
-            recovered: data.recovered,
-            todayRecovered: data.todayRecovered,
-            active: data.active,
-            critical: data.critical,
-          };
-
-          countryClicked(worldwide);
-        });
+      await fetch("https://disease.sh/v3/covid-19/countries").then((response) =>
+        response.json().then((data) => {
+          setCountries(data);
+          getCountries(data);
+        })
+      );
     };
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchCountries = async () => {
-      await fetch("https://disease.sh/v3/covid-19/countries").then((response) =>
-        response.json().then((data) => {
-          const fetchedCountries = data.map((fetchedCountry) => {
-            return {
-              name: fetchedCountry.country,
-              value: fetchedCountry.countryInfo.iso3,
-            };
-          });
-          setCountries(fetchedCountries);
-        })
-      );
+  const onHandleSelectCountry = (e) => {
+    const name = e.target.value;
+    const fetchData = async () => {
+      await fetch(
+        `https://disease.sh/v3/covid-19/countries/${name}?strict=true`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          getCountry(data);
+          const zoomAndPosition = {
+            zoom: 5,
+            position: [data.countryInfo.lat, data.countryInfo.long],
+          };
+          setZoomAndPosition(zoomAndPosition);
+        });
     };
-    fetchCountries();
-  }, []);
+    fetchData();
+    setCountry(name);
+  };
 
-  const onSelectChange = async (e) => {
-    const countryCode = e.target.value;
-    const urlInfobox =
-      countryCode === "worldwide"
-        ? "https://disease.sh/v3/covid-19/all"
-        : `https://disease.sh/v3/covid-19/countries/${countryCode}?strict=true`;
-
-    await fetch(urlInfobox)
-      .then((response) => response.json())
-      .then((data) => {
-        setCountryInfo(data);
-        const country = {
-          cases: data.cases,
-          todayCases: data.todayCases,
-          deaths: data.deaths,
-          todayDeaths: data.todayDeaths,
-          recovered: data.recovered,
-          todayRecovered: data.todayRecovered,
-          active: data.active,
-          critical: data.critical,
-
-          country: data?.country,
-          countryInfo: data?.countryInfo,
-        };
-
-        countryClicked(country);
-      });
-
-    setSelectedCountry(countryCode);
-
-    const urlLinegraph =
-      countryCode === "worldwide"
-        ? "https://disease.sh/v3/covid-19/historical/all?lastdays=all"
-        : `https://disease.sh/v3/covid-19/historical/${countryCode}?lastdays=all`;
-    await fetch(urlLinegraph)
-      .then((response) => response.json())
-      .then((data) => {
-        getHistory(data);
-      });
+  const onHandleWorldwide = (e = "event") => {
+    const fetchData = async () => {
+      await fetch("https://disease.sh/v3/covid-19/all")
+        .then((response) => response.json())
+        .then((data) => {
+          getCountry(data);
+          const zoomAndPosition = {
+            zoom: 3,
+            position: [38, -97],
+          };
+          setZoomAndPosition(zoomAndPosition);
+        });
+    };
+    fetchData();
+    setCountry("worldwide");
   };
 
   useEffect(() => {
-    const urlLinegraph =
-      "https://disease.sh/v3/covid-19/historical/all?lastdays=all";
-    const fetchData = async (url) => {
-      await fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          getHistory(data);
-        });
-    };
-    fetchData(urlLinegraph);
+    onHandleWorldwide();
   }, []);
 
   return (
     <div className="header">
-      <h1>Covid 19 tracker</h1>
+      <h1 className="header__title">Covid-19 data tracker</h1>
       <FormControl className="header__dropdown">
         <Select
           variant="outlined"
-          value={selectedCountry}
-          onChange={onSelectChange}
+          value={country}
+          onChange={onHandleSelectCountry}
         >
-          <MenuItem value="worldwide">worldwide</MenuItem>
+          <MenuItem value="worldwide" onClick={(e) => onHandleWorldwide(e)}>
+            worldwide
+          </MenuItem>
           {countries.map((country) => {
-            return <MenuItem value={country.value}>{country.name}</MenuItem>;
+            return (
+              <MenuItem value={country.country}>{country.country}</MenuItem>
+            );
           })}
         </Select>
       </FormControl>
     </div>
   );
-};
-
+}
 const mapDispatchToProps = (dispatch) => {
   return {
-    countryClicked: (country) => dispatch(countryClicked(country)),
-    getHistory: (history) => dispatch(historyAction(history)),
+    getCountries: (countries) => dispatch(countriesActionGenerator(countries)),
+    getCountry: (country) => dispatch(selectCountryActionGenerator(country)),
+    setZoomAndPosition: (zoomAndPosition) =>
+      dispatch(setZoomAndPosition(zoomAndPosition)),
   };
 };
 

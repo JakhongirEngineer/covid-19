@@ -1,11 +1,14 @@
-import { createStore } from "redux";
-import { combineReducers } from "redux";
-
-import { countryReducer } from "../redux/country/countryReducer";
-import { historyReducer } from "../redux/history/historyReducer";
-
+import { createStore, combineReducers } from "redux";
+import { countryReducer } from "./country/countryReducer";
+import { countriesReducer } from "./countries/countriesReducer";
+import { activeReducer } from "./active/activeReducer";
+import { mapReducer } from "./map/mapReducer";
+import { historyReducer } from "./history/historyReducer";
 const rootReducer = combineReducers({
   country: countryReducer,
+  countries: countriesReducer,
+  active: activeReducer,
+  map: mapReducer,
   history: historyReducer,
 });
 

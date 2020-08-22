@@ -1,33 +1,43 @@
 import React from "react";
 import { connect } from "react-redux";
-
-import "./infoboxContainer.scss";
 import InfoBox from "../infobox/InfoBox";
+import "./infoboxContainer.scss";
+import { setType } from "../../../redux/active/activeActionGenerator";
 
-function InfoboxContainer({ countryInfo }) {
+function InfoboxContainer({ country, active }) {
   return (
-    <div className="infobox-container">
+    <div className="infobox-c">
       <InfoBox
-        title="covid cases"
-        cases={countryInfo?.todayCases}
-        total={countryInfo?.cases}
+        isBlue={active === "cases"}
+        isActive={active === "cases"}
+        type="cases"
+        title="cases"
+        newData={country.todayCases}
+        totalData={country.cases}
       />
       <InfoBox
+        isActive={active === "recovered"}
+        isGreen={active === "recovered"}
         title="recovered"
-        cases={countryInfo?.todayRecovered}
-        total={countryInfo?.recovered}
+        type="recovered"
+        newData={country.todayRecovered}
+        totalData={country.recovered}
       />
       <InfoBox
-        title="death"
-        cases={countryInfo?.todayDeaths}
-        total={countryInfo?.deaths}
+        isRed={active === "deaths"}
+        isActive={active === "deaths"}
+        title="deaths"
+        type="deaths"
+        newData={country.todayDeaths}
+        totalData={country.deaths}
       />
     </div>
   );
 }
 const mapStateToProps = (state) => {
   return {
-    countryInfo: state.country,
+    country: state.country,
+    active: state.active.type,
   };
 };
 

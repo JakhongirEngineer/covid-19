@@ -1,23 +1,14 @@
-import historyActionTypes from "../history/historyActionTypes";
+import { historyActionTypes } from "./historyActionTypes";
 const INITIAL_STATE = {
-  //country: "worldwide",
-  cases: {},
-  deaths: {},
-  recovered: {},
+  history: {
+    labels: [],
+    data: [],
+  },
 };
-
 export const historyReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case historyActionTypes.COUNTRY_SELECTED:
-      if (action.payload.country === undefined) {
-        return { ...state, ...action.payload };
-      } else {
-        return {
-          ...state,
-          ...action.payload.timeline,
-        };
-      }
-
+    case historyActionTypes.SET_HISTORY:
+      return { ...state, history: action.payload };
     default:
       return state;
   }

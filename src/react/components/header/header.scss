@@ -3,4 +3,23 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  &__title {
+    text-transform: uppercase;
+    color: #999999;
+    margin-left: 1rem;
+    @media screen and (max-width: 500px) {
+      font-size: 1.6rem;
+    }
+    @media screen and (max-width: 400px) {
+      font-size: 1.2rem;
+    }
+  }
+  &__dropdown {
+    background-color: white;
+    width: 20vw !important;
+    @media screen and (max-width: 560px) {
+      font-size: 1.6rem;
+      width: 40vw !important;
+    }
+  }
 }

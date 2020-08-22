@@ -1,5 +1,4 @@
 const countryActionTypes = {
-  COUNTRY_CLICKED: "COUNTRY_CLICKED",
+  SELECT_COUNTRY: "SELECT_COUNTRY",
 };
-
 export default countryActionTypes;

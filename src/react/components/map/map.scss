@@ -1,0 +1,40 @@
+.map {
+  position: relative;
+  height: 100%;
+  // background-color: rgba(0, 128, 0, 0.685);
+  padding: 1rem;
+  border-radius: 1rem;
+  // border: 0.5rem solid green;
+  overflow: hidden;
+  margin: -10rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.473);
+  width: 90vw;
+  align-self: center;
+  justify-self: center;
+  @media screen and (max-width: 500px) {
+    padding: 0;
+  }
+  & .leaflet-container {
+    height: 100%;
+  }
+}
+.popup {
+  &__flag {
+    height: 7rem;
+    width: 100%;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem 0;
+  }
+  &__info p {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+}

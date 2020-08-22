@@ -1,9 +1,13 @@
 .app {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  display: grid;
 
-  &__left {
-    flex: 0.9;
-  }
+  grid-template-rows: 10vh 20vh 70vh 90vh;
+
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.774),
+      rgba(0, 0, 0, 0.788)
+    ),
+    url("https://scx2.b-cdn.net/gfx/news/hires/2020/49-covid19.jpg");
+  //background-size: cover;
 }

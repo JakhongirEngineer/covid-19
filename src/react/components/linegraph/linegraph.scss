@@ -1,0 +1,12 @@
+.linegraph {
+  width: 90vw;
+  margin: 1rem;
+  justify-self: center;
+  color: white;
+
+  & .chartjs-render-monitor {
+    height: 100% !important;
+    background-color: rgb(255, 255, 255);
+    color: white;
+  }
+}
