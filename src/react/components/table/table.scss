@@ -7,25 +7,29 @@
   align-self: center;
   justify-self: center;
   font-size: 1.2rem;
+  border-radius: 2rem;
+
   @media screen and (max-width: 971px) {
     font-size: 1rem;
   }
   @media screen and (max-width: 890px) {
     font-size: 0.8rem;
-    width: 95vw;
+    //  width: 95vw;
     padding: 0;
   }
   @media screen and (max-width: 440px) {
-    width: 100vw;
+    // width: 100vw;
     font-size: 0.5rem;
   }
   &__heading {
     padding: 1rem 2rem;
-    background-color: #999999;
+    background-color: #cccccc;
     border-radius: 1px;
-    box-shadow: 0 0.2rem 0.4rem black;
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.5);
+    color: #333333;
     @media screen and (max-width: 890px) {
       padding: 0.5rem;
+      width: 95vw;
     }
     @media screen and (max-width: 560px) {
       padding: 0.2rem;
@@ -42,8 +46,11 @@
     left: 0;
   }
   &__row--data {
+    color: #333333;
+    font-weight: bold;
+    font-size: 1.2rem;
     &:nth-child(odd) {
-      background: #cccccc;
+      background: white;
     }
     &:hover {
       background-color: rgb(245, 94, 24);
@@ -53,7 +60,7 @@
   &__data {
     border-radius: 2px;
     overflow: hidden;
-    padding: 0.3rem 1rem;
+    padding: 1rem;
     text-align: center;
     @media screen and (max-width: 560px) {
       padding: 0.1rem 0.5rem;

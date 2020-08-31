@@ -1,13 +1,33 @@
 .app {
   display: grid;
 
-  grid-template-rows: 10vh 20vh 70vh 90vh;
+  grid-template-rows: 10vh 20vh 80vh 90vh;
 
-  background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.774),
-      rgba(0, 0, 0, 0.788)
-    ),
-    url("https://scx2.b-cdn.net/gfx/news/hires/2020/49-covid19.jpg");
+  // background-image: linear-gradient(
+  //     to bottom,
+  //     rgba(0, 0, 0, 0.774),
+  //     rgba(0, 0, 0, 0.788)
+  //   ),
+  //   url("https://scx2.b-cdn.net/gfx/news/hires/2020/49-covid19.jpg");
+  background-color: #f1f1f1;
   //background-size: cover;
+  &__tableWrapper {
+    height: 100vh;
+    overflow: auto;
+    justify-self: center;
+    padding: 0 0.1rem;
+    background-color: #c1c1c1;
+    border-radius: 1rem;
+    &::-webkit-scrollbar {
+      width: 1rem;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: black;
+      border-radius: 2rem;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 1rem;
+      background-color: red;
+    }
+  }
 }

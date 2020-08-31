@@ -16,7 +16,9 @@ function App() {
       <InfoboxContainer />
       <LineGraph />
       <MapComponent />
-      <Table />
+      <div className="app__tableWrapper">
+        <Table />
+      </div>
     </div>
   );
 }

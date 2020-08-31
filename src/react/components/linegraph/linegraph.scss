@@ -3,10 +3,16 @@
   margin: 1rem;
   justify-self: center;
   color: white;
-
+  object-fit: contain !important;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.397);
+  border-radius: 3rem !important;
+  overflow: hidden;
   & .chartjs-render-monitor {
     height: 100% !important;
     background-color: rgb(255, 255, 255);
     color: white;
+    border-radius: 3rem !important;
+    overflow: hidden;
+    padding-bottom: 10rem;
   }
 }
