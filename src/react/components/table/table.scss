@@ -29,7 +29,6 @@
     color: #333333;
     @media screen and (max-width: 890px) {
       padding: 0.5rem;
-      width: 95vw;
     }
     @media screen and (max-width: 560px) {
       padding: 0.2rem;
@@ -48,7 +47,7 @@
   &__row--data {
     color: #333333;
     font-weight: bold;
-    font-size: 1.2rem;
+
     &:nth-child(odd) {
       background: white;
     }
